@@ -1,51 +1,32 @@
 package Task2;
-//Java program to find first
-//non-repeating character
-class Return 
-{
-	static final int NO_OF_CHARS = 256;
-	static char count[] = new char[NO_OF_CHARS];
+import java.util.HashMap;
+import java.util.Map;
 
-	/* calculate count of characters
-	in the passed string */
-	static void getCharCountArray(String str)
-	{
-		for (int i = 0; i < str.length(); i++)
-			count[str.charAt(i)]++;
-	}
+class Main {
 
-	/* The method returns index of first non-repeating
-	character in a string. If all characters are repeating
-	then returns -1 */
-	static int firstNonRepeating(String str)
-	{
-		getCharCountArray(str);
-		int index = -1, i;
+    public static void main(String[] args) {
+        System.out.println("hello world");
+        System.out.println("firstNonRepeatingLetter(\"stress\") = \"" + firstNonRepeatingLetter("stress") + "\"");
+        System.out.println("firstNonRepeatingLetter(\"sTreSS\") = \"" + firstNonRepeatingLetter("sTreSS") + "\"");
+        System.out.println("firstNonRepeatingLetter(\"aaaaaa\") = \"" + firstNonRepeatingLetter("aaaaaa") + "\"");
+    }
 
-		for (i = 0; i < str.length(); i++) 
-		{
-			if (count[str.charAt(i)] == 1) 
-			{
-				index = i;
-				break;
-			}
-		}
+    static String firstNonRepeatingLetter(String str) {
+        Map<Character, Integer> charToCount = new HashMap<>();
+        for (int i = 0; i < str.length(); i++) {
+            char c = Character.toLowerCase(str.charAt(i));
+            int count = charToCount.getOrDefault(c, 0);
+            if (count == 0 || count == 1) {
+                charToCount.put(c, count + 1);
+            }
+        }
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (charToCount.get(Character.toLowerCase(c)) == 1) {
+                return String.valueOf(c);
+            }
+        }
+        return "";
+    }
 
-		return index;
-	}
-
-	// Driver method
-	public static void main(String[] args)
-	{
-		String str = "stress";
-		int index = firstNonRepeating(str);
-
-		System.out.println(
-			index == -1
-				? "Either all characters are repeating or string "
-					+ "is empty"
-				: "First non-repeating character is "
-					+ str.charAt(index));
-	}
 }
-

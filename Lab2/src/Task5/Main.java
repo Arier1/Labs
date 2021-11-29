@@ -23,6 +23,6 @@ public class Main {
     public static void main(String[] args) {
         Guests g1 = new Guests("Bill", "Murray");
         String s = "Fired:Corwill;Wilfred:Corwill;Barney:TornBull;Betty:Tornbull;Bjon:Tornbull;Raphael:Corwill;Alfred:Corwill";
-        Meeting(s);
+        System.out.println(Meeting(s));
     }
 }
